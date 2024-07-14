@@ -1,0 +1,11 @@
+--2024-03-05 23:13:54--  https://drive.usercontent.google.com/download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh
+Resolving drive.usercontent.google.com (drive.usercontent.google.com)... 142.250.217.129, 2607:f8b0:4007:818::2001
+Connecting to drive.usercontent.google.com (drive.usercontent.google.com)|142.250.217.129|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6403800 (6.1M) [application/octet-stream]
+Saving to: ‘download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh’
+
+download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh        0%[                                                                                                                 ]       0  --.-KB/s               download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh       12%[=============>                                                                                                   ] 797.41K  3.89MB/s               download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh       38%[==========================================>                                                                      ]   2.37M  5.91MB/s               download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh       65%[========================================================================>                                        ]   3.98M  6.62MB/s               download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh       91%[======================================================================================================>          ]   5.60M  6.98MB/s               download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh      100%[================================================================================================================>]   6.11M  6.96MB/s    in 0.9s    
+
+2024-03-05 23:13:55 (6.96 MB/s) - ‘download?id=1AUeaK99x-H7Vabcvcw6mkMa-PTwKxUPh’ saved [6403800/6403800]
+
