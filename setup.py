@@ -10,6 +10,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/data', ['tb4_rw/last.json', 'tb4_rw/last_openvino_2022.1_5shave.blob']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
