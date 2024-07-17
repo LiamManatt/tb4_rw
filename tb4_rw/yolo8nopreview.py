@@ -7,8 +7,10 @@ import time
 import argparse
 import json
 import blobconverter
+from ament_index_python.packages import get_package_share_directory
 
-working_file = "/home/ubuntu/ros2_ws/src/tb4_rw/tb4_rw/data2.txt"
+package_share_directory = get_package_share_directory('tb4_rw') + '/data'
+
 
 # parse arguments
 """ parser = argparse.ArgumentParser()
@@ -19,7 +21,7 @@ parser.add_argument("-c", "--config", help="Provide config path for inference",
 args = parser.parse_args() """
 
 # parse config
-configPath = Path('yolov8n.json')
+configPath = Path(package_share_directory +'/last.json')
 if not configPath.exists():
     raise ValueError("Path {} does not exist!".format(configPath))
 
@@ -46,7 +48,7 @@ nnMappings = config.get("mappings", {})
 labels = nnMappings.get("labels", {})
 labelMap = labels
 # get model path
-nnPath = "yolov8n_openvino_2022.1_5shave.blob"
+nnPath = package_share_directory + "/last_openvino_2022.1_5shave.blob"
 """
 if not Path(nnPath).exists():
     print("No blob found at {}. Looking into DepthAI model zoo.".format(nnPath))
@@ -121,6 +123,7 @@ stereo.depth.link(spatialDetectionNetwork.inputDepth)
 spatialDetectionNetwork.passthroughDepth.link(xoutDepth.input)
 spatialDetectionNetwork.outNetwork.link(nnNetworkOut.input)
 
+
 # Connect to device and start pipeline
 with dai.Device(pipeline) as device:
 
@@ -138,26 +141,18 @@ with dai.Device(pipeline) as device:
     while True:
         inDet = detectionNNQueue.get()
 
-        counter+=1
-        current_time = time.monotonic()
-        if (current_time - startTime) > 1 :
-            fps = counter / (current_time - startTime)
-            counter = 0
-            startTime = current_time
+        
 
         detections = inDet.detections
 
-        # If the frame is available, draw bounding boxes on it and show the frame
         if not detections:
-            with open(working_file, 'a') as file:
-                file.write("[None, None, None]\r")
+            #with open(working_file, 'a') as file:
+                #file.write("[None, None, None]\r")
+            print("[None, None, None, None]\r")
         for detection in detections:
-           # print(f"[{int(detection.spatialCoordinates.x)/1000}, {int(detection.spatialCoordinates.y)/1000}, {int(detection.spatialCoordinates.z)/1000}]")
-           # print(f"Y: {int(detection.spatialCoordinates.y)/1000} m")
-           # print(f"Z: {int(detection.spatialCoordinates.z)/1000} m")
-           # print(f"Label: {str(labels[detection.label])}")
-           with open(working_file, 'a') as file:
-               file.write(f"[{int(detection.spatialCoordinates.x)/1000}, {int(detection.spatialCoordinates.y)/1000}, {int(detection.spatialCoordinates.z)/1000}]\r")
+           #with open(working_file, 'a') as file:
+               #file.write(f"[{int(detection.spatialCoordinates.x)/1000}, {int(detection.spatialCoordinates.y)/1000}, {int(detection.spatialCoordinates.z)/1000}]\r")
+           print(f"[{detection.label},{int(detection.spatialCoordinates.x)/1000}, {int(detection.spatialCoordinates.y)/1000}, {int(detection.spatialCoordinates.z)/1000}]\r")
 
 
        # print('fps:', fps)
