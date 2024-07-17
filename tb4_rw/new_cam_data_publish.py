@@ -4,11 +4,28 @@ import rclpy
 from rclpy.node import Node
 import threading
 import time
-
+import argparse
 from std_msgs.msg import String
+import os
+parser = argparse.ArgumentParser(description="Process a directory and a file name.")
 
-working_dir = "/home/ubuntu/ros2_ws/src/tb4_rw/tb4_rw"
-working_file = "/home/ubuntu/ros2_ws/src/tb4_rw/tb4_rw/data2.txt"
+parser.add_argument(
+"-d", "--directory",
+required=True,
+help="Directory to be processed."
+)
+
+parser.add_argument(
+"-f", "--file",
+type=str,
+required=True,
+help="File name to be processed."
+)
+
+args = parser.parse_args()
+
+working_dir = args.directory
+working_file = working_dir + '/' + args.file
 
 publish_data = []
 with open(working_file, "w") as file:
@@ -35,7 +52,9 @@ class new_cam_data_publish(Node):
 def start_camera(args=None):
     import sys
     sys.path.append(working_dir)
-    import yolo8nopreview
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from . import yolo8nopreview
+    # from . import yolonav2
 
 
 def publish(args=None):
